@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./stylesheets/home.css">
+  <title>New Post</title>
+</head>
+<body>
+    <aside>
+  <h1>New Post</h1>
+  <form action="/post" method="POST">
+    <label for="title">Post Title:</label>
+    <input type="text" id="title" name="title" required>
+    <br><br>
+    <label for="contentText">Post Content:</label>
+    <textarea id="contentText" name="contentText" rows="4" required></textarea>
+    <br>
+    <button type="submit">Create Post</button>
+    <button type="button" onclick="goToProfile()">Profile</button>
+    <button type="button" onclick="goToHome()">Home</button>
+
+  </form>
+</aside>
+<main>
+    <h1>Post List</h1>
+    <ul>
+      <% for (const post of posts) { %>
+        <li class="site-post">
+          <p>Oluşturan Kullanıcı: <%= post.FirstName%></p>
+          <h2><%= post.Title %></h2>
+          <p><%= post.ContentText %></p>
+          <p>Beğeni Sayısı: <span id="likeCount<%= post.ID %>"><%= post.likeCount %></span></p>
+          <button onclick="likePost('<%= post.ID %>')">Like</button>
+          <form id="commentForm">
+            <label for="contentText2">Your Comment:</label>
+            <textarea id="contentText_<%= post.ID %>" class="contentText" rows="1" required></textarea>
+            <button type="button" onclick="submitComment('<%= post.ID %>')">Submit Comment</button>
+            
+          </form>
+          <div id="commentsContainer<%= post.ID %>">
+          </div>
+        </li> 
+        <script src='./javascripts/getComment.js'></script>
+        <script>
+          getCommentsForPost('<%= post.ID %>');
+      </script>
+      <% } %>
+    </ul>
+  </main>
+  <script src='./javascripts/likePost.js'></script>
+  <script src='./javascripts/postComment.js'></script>
+  <script src='./javascripts/goToProfile.js'></script>
+  <script src='./javascripts/goToHome.js'></script>
+
+</body>
+</html>

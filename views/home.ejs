@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="./stylesheets/home.css">
+</head>
+<body>
+  <aside>
+    <h2>ÖNERİLEN ARKADAŞLAR</h2>
+    <ul>
+      <% for (const notfriend of notfriends) { %>
+        <li><%= notfriend.FirstName %><button data-userid="<%= notfriend.ID %>" id="sendFriendRequestBtn" class="add-friend-button">Arkadaş Ekle</button></li>
+      <% } %>
+    </ul>
+    <br><br><br>
+    <ul>
+      <h2>ARKADAŞLARIM</h2>
+      <% for (const friend of friends ) { %>
+        <li>- <%= friend.FirstName %></li>
+        <% } %>
+    </ul>
+  </aside>
+  <main>
+    <section id="receivedFriendRequests">
+      <h2>Gelen Arkadaşlık İstekleri</h2>
+      <ul>
+        <% for (const receivedRequest of receivedFriendRequests) { %>
+          <div class="friend-request">
+            <li class="received-request-item" 
+            data-requestid="<%= receivedRequest.ID %>" 
+            data-createdat="<%= receivedRequest.CreatedAt %>">
+              <%= receivedRequest.FirstName %>
+            </li>
+            <button data-requestid="<%= receivedRequest.ID %>" class="accept-friend-button">Kabul Et</button>
+            <button data-requestid="<%= receivedRequest.ID %>" class="reject-friend-button">Reddet</button>
+          </div>
+        <% } %>
+      </ul>
+      
+    </section>
+    <!-- <section id="acceptedFriendRequests">
+      <h2>Kabul Edilen Arkadaşlık İstekleri</h2>
+      <ul>
+        <% for (const acceptedFriend of acceptedFriendRequests) { %>
+          <li><%= acceptedFriend.SenderUserID  %> 
+        <% } %>
+      </ul>
+    </section> -->
+    <button type="button" onclick="goToPost()">Post</button>
+    <button type="button" onclick="goToProfile()">Profile</button>
+  </main>
+  <script src='./javascripts/dateType.js'></script>
+  <script src='./javascripts/addFriend.js'></script>
+  <script src='./javascripts/acceptFriend.js'></script>
+  <script src='./javascripts/goToPost.js'></script>
+  <script src='./javascripts/goToProfile.js'></script>
+  <script src='./javascripts/rejectFriend.js'></script>
+</body>
+
+</html>

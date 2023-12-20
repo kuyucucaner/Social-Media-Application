@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="./stylesheets/profile.css">
+
+</head>
+<body>
+    <h1>Welcome to Your Profile</h1>
+
+    <div>
+      <% if (user.photo) { %>
+        <img src="<%= user.photo %>" alt="Profile Image" style="border-radius: 50%;">
+      <% } else { %>
+        <p>No profile photo available.</p>
+      <% } %>       <p><strong>Username:</strong> <%= user.userName %></p>
+        <p><strong>Firstname:</strong> <%= user.firstName %></p>
+        <p><strong>Lastname:</strong> <%= user.lastName %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+    </div>
+    <div id="userPosts">
+      <h2>Your Posts</h2>
+      <ul>
+        <% if (userPost && userPost.length > 0) { %>
+          <% for (const post of userPost) { %>
+            <li>
+              <h3><%= post.Title %></h3>
+              <p><%= post.ContentText %></p>
+              <!-- Diğer post bilgileri eklenebilir -->
+            </li>
+          <% } %>
+        <% } else { %>
+          <li>No posts available.</li>
+        <% } %>
+      </ul>
+    </div>
+</body>
+</html>
